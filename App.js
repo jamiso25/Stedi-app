@@ -1,11 +1,11 @@
 import React, { useEffect, useState, } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, AsyncStorage, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import  Navigation from './components/Navigation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnboardingScreen from './screens/OnboardingScreen';
 import Home from './screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -81,10 +81,11 @@ return(
                 })
               }
             )
-            console.log(loginResponse.status)
+            
 
             if(loginResponse.status == 200){
               const sessionToken = await loginResponse.text();
+              await AsyncStorage.setItem('sessionToken', sessionToken)
               console.log('Session Token', sessionToken)
               setIsLoggedIn(true);
             }
