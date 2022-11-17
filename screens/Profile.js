@@ -61,7 +61,7 @@ const Profile = (props) => {
             </View>
           </Camera>
         </View>
-      )
+      );
 
     }
 else{//
